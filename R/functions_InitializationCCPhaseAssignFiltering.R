@@ -266,7 +266,9 @@ cellCyclePhaseAssign <- function(data,
       geneNames[1:(length(geneCategoriesExternal[,i])), i] <- gsub(" ", "", geneCategoriesExternal[,i])
       number.Of.Genes.In.Data <- sum(geneNames[,i] %in% rownames(data))
       geneNames[1:number.Of.Genes.In.Data, i] <- geneNames[(geneNames[,i] %in% rownames(data)), i]
-      geneNames[(number.Of.Genes.In.Data+1):dim(geneCategoriesExternal)[1], i] <- NA
+      if ((number.Of.Genes.In.Data+1) < dim(geneCategoriesExternal)[1] ){
+        geneNames[(number.Of.Genes.In.Data+1):dim(geneCategoriesExternal)[1], i] <- NA
+      }
     }
 
     #delete zero genes
